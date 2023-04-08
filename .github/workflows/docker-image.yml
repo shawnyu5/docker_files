@@ -1,18 +1,19 @@
-name: Docker Image CI
+name: Build and push to dockerhub
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ["master"]
   pull_request:
-    branches: [ "master" ]
+    branches: ["master"]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      - uses: actions/checkout@v3
+      # - name: find all Docker files
+        # id: set-matrix
+        # run: echo "::set-output name=matrix::$(ls * | jq -R -s -c 'split("\n")[:-1]')"
+      - name: Build rust trunk image
+        run: docker buildx build -t rust-trunk:$(date +%s) - < Dockerfile-rust-trunk
