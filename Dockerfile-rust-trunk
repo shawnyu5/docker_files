@@ -1,6 +1,6 @@
 # vim: ft=dockerfile
 
 FROM rust:alpine3.16
-RUN apk add pkgconfig openssl libressl-dev build-base npm --no-cache
+RUN apk add pkgconfig openssl libressl-dev build-base --no-cache
 RUN cargo install trunk
 
