@@ -1,0 +1,6 @@
+# vim: ft=dockerfile
+
+FROM rust:alpine3.16
+RUN apt-get update && apt-get -y install pkg-config openssl libssl-dev --no-install-recommends
+RUN cargo install trunk
+
