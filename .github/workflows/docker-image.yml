@@ -16,4 +16,10 @@ jobs:
         # id: set-matrix
         # run: echo "::set-output name=matrix::$(ls * | jq -R -s -c 'split("\n")[:-1]')"
       - name: Build rust trunk image
-        run: docker buildx build -t rust-trunk:$(date +%s) - < Dockerfile-rust-trunk
+        run: docker buildx build -t shawnyu5/rust-trunk - < Dockerfile-rust-trunk
+
+      - name: login to dockerhub
+        run: docker login -u ${ secrets.DOCKER_USERNAME } -p ${ secrets.DOCKER_PASSWORD }
+
+      - name: push rust truct image
+        run: docker push shawnyu5/rust-trunk
